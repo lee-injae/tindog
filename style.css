@@ -1,0 +1,24 @@
+.hidden {
+    display: none;
+}
+
+.profile {
+    position: relative;
+    /* border: purple 2px solid; */
+}
+
+/* .profile-img {
+    position: relative;
+} */
+
+.profile-name {
+    position: absolute;
+    top: 0;
+    left: 55px;
+}
+
+.absolute-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
