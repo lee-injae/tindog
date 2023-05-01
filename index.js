@@ -3,20 +3,13 @@ import Profile from "./Profile.js"
 
 const likedArray = []
 const nopedArray = []
-const card = new Profile(dogs[0])
+let card = new Profile(dogs[0])
 
 function render() {
     document.getElementById("profile").innerHTML = card.getProfileHtml()   
 }
 
 render()
-
-// function getNewCard(){
-//     const nextDogData = dogs.shift()
-//     return nextDogData ? dogs.length : {}
-// }
-
-console.log(dogs.shift())
 
 document.addEventListener("click", function(e){
     if (e.target.dataset.like){
@@ -28,19 +21,32 @@ document.addEventListener("click", function(e){
 })
 
 function handleLikeClick(e){
+    console.log(dogs)
     document.getElementById("like-sign").classList.toggle("hidden")
-    // console.log(e.target.dataset)
-    // console.log(dogs)
     card.liked()
-    
 
-    
-    // console.log(dogs)
+    likedArray.push(dogs.shift())
+    console.log("like array: ", likedArray)
+    console.log("dog array, ", dogs)
+    console.log("card: ", card)
 
-    // dogs.shift()
-    // console.log(dogs)
+    card = dogs[0]
+
+    renderNewprofile()
+}
+
+function getNewCard(){
+    return nextDogData ? dogs.length : {}
+}
+
+function renderNewprofile(){
+    console.log("new card: ", card)
     setTimeout(function(){
-        renderProfile(dogs)
+        if (dogs){
+            render()
+        } else {
+            return {}
+        }
 
     }, 2000)
 }
