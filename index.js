@@ -25,33 +25,31 @@ document.addEventListener("click", function(e){
 function handleLikeClick(e){
     document.getElementById("like-sign").classList.toggle("hidden")
     card.liked()
-    // swipedArray.push(dogs.shift())
     
-    // swipedArray.forEach(function(dog){
-    //     if (dog.hasBeenLiked){
-    //         likedArray.push(dog)
-    //     }
-    // })
+    dogs.forEach(function(dog){
+        if (dog.uuid === e.target.dataset.like)
+        dog.hasBeenSwiped = true
+        dog.hasBeenLiked = true
+    })
 
     swipe()
-    console.log("previous card: ", card)
     getNewCard()
-    console.log("new card: ", card)
     renderNewProfile()
 }
 
 function swipe(){
     swipedArray.push(dogs.shift())
-    console.log("dogsarray after swipe: ", dogs)
     swipedArray.forEach(function(dog){
         if (dog.hasBeenLiked){
             likedArray.push(dog)
         }
+        else if (dog.hasBeenSwiped && !dog.hasBeenLiked) {
+            nopedArray.push(dog)
+        }
     })
-
-    console.log("liked array: ", likedArray)
-    console.log("swiped array: ", swipedArray)
-    console.log("dog array, ", dogs)
+    console.log("likedArray after swipe: ", likedArray)
+    console.log("swipedArray after swipe: ", swipedArray)
+    console.log("nopedArray after swipe: ", nopedArray)
 
 }
 
@@ -59,9 +57,6 @@ function getNewCard(){
     card = (dogs.length) ? new Profile(dogs[0]) : {}
     return card
 }
-
-console.log(card)
-console.log(getNewCard())
 
 function renderNewProfile(){
     setTimeout(function(){
@@ -73,13 +68,13 @@ function handleNopeClick(e){
     document.getElementById("nope-sign").classList.toggle("hidden")
     card.noped()
     
-    swipedArray.push(dogs.shift())
+    dogs.forEach(function(dog){
+        if (dog.uuid === e.target.dataset.nope)
+        dog.hasBeenSwiped = true
+    })
     
-    console.log("swiped array: ", swipedArray)
-    console.log("noped array: ", nopedArray)
-
-
-
+    swipe()
+    getNewCard()
     renderNewProfile()
 }
 
