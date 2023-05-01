@@ -28,9 +28,10 @@ function handleLikeClick(e){
     likedArray.push(dogs.shift())
     console.log("like array: ", likedArray)
     console.log("dog array, ", dogs)
-    console.log("card: ", card)
+    console.log("previous card: ", card)
 
-    card = dogs[0]
+    card = new Profile(dogs[0])
+    console.log("new card: ", card)
 
     renderNewprofile()
 }
@@ -40,13 +41,13 @@ function getNewCard(){
 }
 
 function renderNewprofile(){
-    console.log("new card: ", card)
     setTimeout(function(){
-        if (dogs){
-            render()
-        } else {
-            return {}
-        }
+        render() ? (dog) : {}
+        // if (dogs){
+        //     render()
+        // } else {
+        //     return {}
+        // }
 
     }, 2000)
 }
