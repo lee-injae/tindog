@@ -1,8 +1,10 @@
 import dogs from "./data.js"
 import Profile from "./Profile.js"
 
-const likedArray = []
-const nopedArray = []
+const swipedArray = []
+let likedArray = []
+let nopedArray = []
+
 let card = new Profile(dogs[0])
 
 function render() {
@@ -21,56 +23,64 @@ document.addEventListener("click", function(e){
 })
 
 function handleLikeClick(e){
-    console.log(dogs)
     document.getElementById("like-sign").classList.toggle("hidden")
     card.liked()
+    // swipedArray.push(dogs.shift())
+    
+    // swipedArray.forEach(function(dog){
+    //     if (dog.hasBeenLiked){
+    //         likedArray.push(dog)
+    //     }
+    // })
 
-    likedArray.push(dogs.shift())
-    console.log("like array: ", likedArray)
-    console.log("dog array, ", dogs)
+    swipe()
     console.log("previous card: ", card)
-
-    card = new Profile(dogs[0])
+    getNewCard()
     console.log("new card: ", card)
+    renderNewProfile()
+}
 
-    renderNewprofile()
+function swipe(){
+    swipedArray.push(dogs.shift())
+    console.log("dogsarray after swipe: ", dogs)
+    swipedArray.forEach(function(dog){
+        if (dog.hasBeenLiked){
+            likedArray.push(dog)
+        }
+    })
+
+    console.log("liked array: ", likedArray)
+    console.log("swiped array: ", swipedArray)
+    console.log("dog array, ", dogs)
+
 }
 
 function getNewCard(){
-    return nextDogData ? dogs.length : {}
+    card = (dogs.length) ? new Profile(dogs[0]) : {}
+    return card
 }
 
-function renderNewprofile(){
-    setTimeout(function(){
-        render() ? (dog) : {}
-        // if (dogs){
-        //     render()
-        // } else {
-        //     return {}
-        // }
+console.log(card)
+console.log(getNewCard())
 
+function renderNewProfile(){
+    setTimeout(function(){
+        render() ? (dogs) : {}
     }, 2000)
 }
 
 function handleNopeClick(e){
-    console.log("cilckeee")
-
-    const nope = document.getElementById("nope-sign")
-    nope.classList.remove("hidden")
-    nope.classList.add("absolute-top-left")
+    document.getElementById("nope-sign").classList.toggle("hidden")
+    card.noped()
     
-    dogs.forEach(function(dog){
-        if (dog.uuid === e.target.dataset.nope){
-            dog.hasBeenSwiped = true
-        }
-    })
-    dogs.shift()
-    console.log(dogs)
+    swipedArray.push(dogs.shift())
+    
+    console.log("swiped array: ", swipedArray)
+    console.log("noped array: ", nopedArray)
 
-    setTimeout(function(){
-        renderProfile(dogs)
 
-    }, 2000)
+
+    renderNewProfile()
 }
 
 
