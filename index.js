@@ -37,33 +37,6 @@ function handleLikeClick(e){
     renderNewProfile()
 }
 
-function swipe(){
-    swipedArray.push(dogs.shift())
-    swipedArray.forEach(function(dog){
-        if (dog.hasBeenLiked){
-            likedArray.push(dog)
-        }
-        else if (dog.hasBeenSwiped && !dog.hasBeenLiked) {
-            nopedArray.push(dog)
-        }
-    })
-    console.log("likedArray after swipe: ", likedArray)
-    console.log("swipedArray after swipe: ", swipedArray)
-    console.log("nopedArray after swipe: ", nopedArray)
-
-}
-
-function getNewCard(){
-    card = (dogs.length) ? new Profile(dogs[0]) : {}
-    return card
-}
-
-function renderNewProfile(){
-    setTimeout(function(){
-        render() ? (dogs) : {}
-    }, 2000)
-}
-
 function handleNopeClick(e){
     document.getElementById("nope-sign").classList.toggle("hidden")
     card.noped()
@@ -77,6 +50,37 @@ function handleNopeClick(e){
     getNewCard()
     renderNewProfile()
 }
+
+function swipe(){
+    swipedArray.push(card)
+    
+    likedArray = swipedArray.filter(function(dogProfile){
+        return dogProfile.hasBeenLiked
+    })
+
+    nopedArray = swipedArray.filter(function(dogProfile){
+        return (dogProfile.hasBeenSwiped && !dogProfile.hasBeenLiked)
+    })
+    
+    console.log("likedArray after swipe: ", likedArray)
+    console.log("swipedArray after swipe: ", swipedArray)
+    console.log("nopedArray after swipe: ", nopedArray)
+
+}
+
+function getNewCard(){
+    dogs.shift()
+    card = (dogs.length) ? new Profile(dogs[0]) : {}
+    return card
+}
+
+function renderNewProfile(){
+    setTimeout(function(){
+        render() ? (dogs) : {}
+    }, 2000)
+}
+
+
 
 
    
