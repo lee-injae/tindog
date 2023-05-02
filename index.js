@@ -22,6 +22,14 @@ document.addEventListener("click", function(e){
     }
 })
 
+document.addEventListener("keydown", function(e){
+    if (e.code === "ArrowLeft"){
+        handleNopeClick(e)
+    } else if (e.code === "ArrowRight") {
+        handleLikeClick(e)
+    } 
+})
+
 function handleLikeClick(e){
     document.getElementById("like-sign").classList.toggle("hidden")
     card.liked()
