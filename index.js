@@ -84,8 +84,14 @@ function getNewCard(){
 
 function renderNewProfile(){
     setTimeout(function(){
-        render() ? (dogs) : {}
+        (dogs.length) ? render() : noMoreProfile()
     }, 2000)
+}
+
+function noMoreProfile(){
+    const noMoreMsg = "That's it!" 
+
+    document.getElementById("profile").innerHTML = noMoreMsg
 }
 
 
