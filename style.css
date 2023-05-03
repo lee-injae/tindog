@@ -1,11 +1,37 @@
+body{
+    margin:0;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .hidden {
     display: none;
 }
 
 .profile {
     position: relative;
+    border: magenta 2px solid;
     /* border: purple 2px solid; */
 }
+
+.profile-img {
+    border-radius: 15px;
+    width: 100%;
+}
+
+.paw-icon-container {
+    background-image: linear-gradient(to left, #fa695a, #f83375);
+    padding: 10px 5px;
+    border-radius: 30px;
+    width: 80px;
+    text-align: center;
+}
+
+.paw-icon{
+    filter: brightness(0) invert(1);
+    width: 25px
+}
+
+
 
 /* .profile-img {
     position: relative;
@@ -21,4 +47,16 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    /* background-color: green; */
+}
+
+.profile-icon, .chat-icon{
+    width: 35px;
 }
