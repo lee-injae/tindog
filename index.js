@@ -32,7 +32,7 @@ document.addEventListener("keydown", function(e){
 function handleLikeClick(e){
     document.getElementById("like-sign").classList.toggle("hidden")
     card.liked()
-    
+
     dogs.forEach(function(dog){
         if (dog.uuid === e.target.dataset.like)
         dog.hasBeenSwiped = true
@@ -72,7 +72,6 @@ function swipe(){
     console.log("likedArray after swipe: ", likedArray)
     console.log("swipedArray after swipe: ", swipedArray)
     console.log("nopedArray after swipe: ", nopedArray)
-
 }
 
 function getNewCard(){
