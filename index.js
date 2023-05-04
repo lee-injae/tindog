@@ -13,7 +13,7 @@ function render() {
 
 render()
 
-document.addEventListener("click", function(e){
+document.addEventListener("click", (e) => {
     if (e.target.dataset.like){
         handleLikeClick(e)
     }
@@ -22,7 +22,7 @@ document.addEventListener("click", function(e){
     }
 })
 
-document.addEventListener("keydown", function(e){
+document.addEventListener("keydown", (e) => {
     if (e.code === "ArrowLeft"){
         handleNopeClick(e)
     } else if (e.code === "ArrowRight") {
@@ -41,7 +41,7 @@ function handleNopeClick(e){
 }
 
 function yes(e){
-    dogs.forEach(function(dog){
+    dogs.forEach( (dog) => {
         if (dog.uuid === e.target.dataset.like)
         dog.hasBeenSwiped = true
         dog.hasBeenLiked = true
@@ -52,7 +52,7 @@ function yes(e){
 }
 
 function no(e){
-    dogs.forEach(function(dog){
+    dogs.forEach( (dog) => {
         if (dog.uuid === e.target.dataset.like)
         dog.hasBeenSwiped = true
     })
@@ -64,13 +64,13 @@ function no(e){
 function swipedProfileArrayArrange(){
     swipedArray.push(currentCard)
     
-    likedArray = swipedArray.filter(function(dogProfile){
-        return dogProfile.hasBeenLiked
-    })
+    likedArray = swipedArray.filter( 
+        (dogProfile) => dogProfile.hasBeenLiked
+    )
 
-    nopedArray = swipedArray.filter(function(dogProfile){
-        return (dogProfile.hasBeenSwiped && !dogProfile.hasBeenLiked)
-    })
+    nopedArray = swipedArray.filter( 
+        (dogProfile) => (dogProfile.hasBeenSwiped && !dogProfile.hasBeenLiked)
+    )
     
     console.log("likedArray after swipe: ", likedArray)
     console.log("swipedArray after swipe: ", swipedArray)
@@ -86,9 +86,8 @@ function getNewProfile() {
 
 
 function renderNewProfile(){
-    setTimeout(function(){
-        (currentCard.uuid) ? render() : noMoreProfile()
-    }, 500)
+    setTimeout( () =>  (currentCard.uuid) ? render() : noMoreProfile() 
+    , 500)
 }
 
 function noMoreProfile(){

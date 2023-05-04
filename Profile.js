@@ -38,8 +38,6 @@ class Profile {
             </section>
         `
     }
-
-
 }
 
 export default Profile
