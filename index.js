@@ -102,12 +102,15 @@ function getNewCard(){
 function renderNewProfile(){
     setTimeout(function(){
         (dogs.length) ? render() : noMoreProfile()
-    }, 2000)
+    }, 500)
 }
 
 function noMoreProfile(){
-    const noMoreMsg = "That's it!" 
-
+    const noMoreMsg = `
+    <div class="end-msg-container">
+        <div class="end-msg">That's it!</div>
+    </div>
+    `
     document.getElementById("profile").innerHTML = noMoreMsg
 }
 
