@@ -6,24 +6,6 @@ let likedArray = []
 let nopedArray = []
 let card = new Profile(dogs[0])
 
-// function getHeader(){
-    
-//     let headerHtml = `
-//         <div class="profile-icon-container">
-//             <img src="assets/profile-icon.png" alt="profile-icon">
-//         </div>
-//         <div class="paw-icon-container"> 
-//             <img src="assets/paw-icon.png" alt="paw-icon">
-//         </div>
-//         <div class="chat-icon-container">
-//             <img src="assets/chat-icon.png" alt="chat-icon">
-//         </div>
-//     `
-
-
-// }
-
-
 function render() {
     document.getElementById("profile").innerHTML = card.getProfileHtml()   
 }
