@@ -4,10 +4,11 @@ import Profile from "./Profile.js"
 const swipedArray = []
 let likedArray = []
 let nopedArray = []
-let card = new Profile(dogs[0])
+let currentProfileIndex = 0
+let currentCard = new Profile(dogs[0])
 
 function render() {
-    document.getElementById("profile").innerHTML = card.getProfileHtml()   
+    document.getElementById("profile").innerHTML = currentCard.getProfileHtml()   
 }
 
 render()
@@ -31,35 +32,37 @@ document.addEventListener("keydown", function(e){
 
 function handleLikeClick(e){
     document.getElementById("like-sign").classList.toggle("hidden")
-    card.liked()
+    yes(e)
+}
 
+function handleNopeClick(e){
+    document.getElementById("nope-sign").classList.toggle("hidden")
+    no(e)
+}
+
+function yes(e){
     dogs.forEach(function(dog){
         if (dog.uuid === e.target.dataset.like)
         dog.hasBeenSwiped = true
         dog.hasBeenLiked = true
     })
-
-    swipe()
-    getNewCard()
-    renderNewProfile()
+    swipedProfileArrayArrange()
+    currentCard.setMatchStatus(true)
+    getNewProfile()
 }
 
-function handleNopeClick(e){
-    document.getElementById("nope-sign").classList.toggle("hidden")
-    card.noped()
-    
+function no(e){
     dogs.forEach(function(dog){
-        if (dog.uuid === e.target.dataset.nope)
+        if (dog.uuid === e.target.dataset.like)
         dog.hasBeenSwiped = true
     })
-    
-    swipe()
-    getNewCard()
-    renderNewProfile()
+    swipedProfileArrayArrange()
+    currentCard.setMatchStatus(false)
+    getNewProfile()
 }
 
-function swipe(){
-    swipedArray.push(card)
+function swipedProfileArrayArrange(){
+    swipedArray.push(currentCard)
     
     likedArray = swipedArray.filter(function(dogProfile){
         return dogProfile.hasBeenLiked
@@ -74,15 +77,17 @@ function swipe(){
     console.log("nopedArray after swipe: ", nopedArray)
 }
 
-function getNewCard(){
-    dogs.shift()
-    card = (dogs.length) ? new Profile(dogs[0]) : {}
-    return card
+function getNewProfile() {
+    currentProfileIndex+=1
+    currentCard = (currentProfileIndex < dogs.length) ? new Profile(dogs[currentProfileIndex]) : {}
+    console.log("currentCard: ", currentCard)
+    renderNewProfile()
 }
+
 
 function renderNewProfile(){
     setTimeout(function(){
-        (dogs.length) ? render() : noMoreProfile()
+        (currentCard.uuid) ? render() : noMoreProfile()
     }, 500)
 }
 

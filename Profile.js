@@ -1,18 +1,25 @@
+class Profile {
+    constructor(data){
+        Object.assign(this, data)
+    }
 
-function Profile(data){
-    Object.assign(this, data)
+    setMatchStatus(bool){
+        this.hasBeenLiked = bool
+        this.hasBeenSwiped = true
+    }
     
-    this.getProfileHtml = function(){
+    getProfileHtml() {
         const {name, avatar, age, bio, hasBeenSwiped, hasBeenLiked, uuid} = this
-
         return `
             <img class="profile-img" src=${avatar}>
             <div class="profile-info">
                 <h4 class="profile-name">${name}, ${age}</h4>
-                <p class="profile-bio">${bio}</p>
+                <div class="profile-bio">${bio}</div>
             </div>
+            
             <img class="absolute-top-left hidden" id="like-sign" src="assets/like-sign.png" alt="like-sign">
             <img class="absolute-top-left hidden" id="nope-sign" src="assets/nope-sign.png" alt="nope-sign">
+            
             <section class="actions">
                 <button>
                     <img class="nope-icon" 
@@ -30,16 +37,9 @@ function Profile(data){
                 </button>
             </section>
         `
-        }
-
-    this.liked = function(){
-        this.hasBeenSwiped = true;
-        this.hasBeenLiked = true
     }
 
-    this.noped = function(){
-        this.hasBeenSwiped = true
-    }
+
 }
 
 export default Profile
